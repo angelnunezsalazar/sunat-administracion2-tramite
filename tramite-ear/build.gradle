@@ -1,0 +1,7 @@
+//EAR Plugin http://www.gradle.org/docs/current/userguide/ear_plugin.html
+apply plugin: 'ear'
+
+dependencies {
+	//EAR modules que se incluirán en el root
+    deploy project(':tramite-model'), project(':tramite-services')
+}

@@ -1,0 +1,55 @@
+subprojects { subProject ->
+	group = 'procesos.administracion2.tramite'
+	version = currentversion
+   
+   repositories {
+       mavenCentral()
+    }
+	
+	if (!subProject.name.contains('ear')){
+		apply plugin: 'java'
+
+		dependencies {
+			testCompile 'junit:junit:4.8.2'
+		}
+	}
+}
+
+buildscript {
+    repositories {
+        maven { url 'http://repository.codehaus.org' }
+        mavenCentral()
+    }
+    dependencies {
+        classpath(group: 'org.codehaus.groovy.modules.http-builder', name: 'http-builder', version: '0.6')
+    }
+}
+
+def buildPromotion=new BuildPromotion()
+task promoteQA<<{
+	buildPromotion.promote('multimodule','1372169950106','libs-releasecandidate-local')
+}
+
+task promoteProd<<{
+	buildPromotion.promote('multimodule','1372172452128','libs-release-local')
+}
+
+import groovyx.net.http.RESTClient
+class BuildPromotion{
+
+	void promote(String buildName,String buildNumber,String targetRepo){
+		def http = new RESTClient('http://localhost:8081/artifactory/')
+		http.headers['Authorization'] = 'Basic '+'admin:password'.bytes.encodeBase64()
+		
+		http.handler.success = { println "Promotion Success!" }
+ 
+		http.handler.failure = { resp,json  ->
+		    def message= "Promotion Fail: ${resp.statusLine}\nResponse: ${json}"
+		    throw new InvalidUserDataException(message)
+		}
+		
+		http.post(path: "api/build/promote/${buildName}/${buildNumber}",
+		          contentType: "application/json",
+		          body: [ targetRepo: targetRepo])
+	}
+}

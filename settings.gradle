@@ -1,0 +1,7 @@
+include "tramite-services", "tramite-model", "tramite-ear"
+
+//rootProject.name = 'tramite'
+//rootProject.children.each { 
+//	it.name = rootProject.name + it.name 
+//	assert it.projectDir.isDirectory()
+//}
