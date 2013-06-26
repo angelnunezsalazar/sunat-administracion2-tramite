@@ -17,7 +17,7 @@
 	</natures>
 	<filteredResources>
 		<filter>
-			<id>0</id>
+			<id>1372243533941</id>
 			<name></name>
 			<type>10</type>
 			<matcher>
@@ -25,15 +25,15 @@
 				<arguments>
 					<matcher>
 						<id>org.eclipse.ui.ide.multiFilter</id>
-						<arguments>1.0-projectRelativePath-equals-true-false-model</arguments>
+						<arguments>1.0-projectRelativePath-equals-true-false-tramite-ear</arguments>
 					</matcher>
 					<matcher>
 						<id>org.eclipse.ui.ide.multiFilter</id>
-						<arguments>1.0-projectRelativePath-equals-true-false-services</arguments>
+						<arguments>1.0-projectRelativePath-equals-true-false-tramite-services</arguments>
 					</matcher>
 					<matcher>
 						<id>org.eclipse.ui.ide.multiFilter</id>
-						<arguments>1.0-projectRelativePath-equals-true-false-ear</arguments>
+						<arguments>1.0-projectRelativePath-equals-true-false-tramite-model</arguments>
 					</matcher>
 				</arguments>
 			</matcher>
