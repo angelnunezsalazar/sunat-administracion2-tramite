@@ -21,7 +21,7 @@ import groovyx.net.http.RESTClient
 class BuildPromotion{
 
 	void promote(String buildName,String buildNumber,String targetRepo){
-		def http = new RESTClient('http://localhost:8081/artifactory/')
+		def http = new RESTClient('http://localhost:8888/artifactory/')
 		http.headers['Authorization'] = 'Basic '+'admin:password'.bytes.encodeBase64()
 		
 		http.handler.success = { println "Promotion Success!" }
