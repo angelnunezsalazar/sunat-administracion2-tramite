@@ -10,11 +10,11 @@ buildscript {
 
 def buildPromotion=new BuildPromotion()
 task promoteRC<<{
-	buildPromotion.promote('${bamboo.buildKey}','${bamboo.buildNumber}','libs-releasecandidate-local')
+	buildPromotion.promote(buildKey,buildNumber,'libs-releasecandidate-local')
 }
 
 task promoteRelease<<{
-	buildPromotion.promote('${bamboo.buildKey}','${bamboo.buildNumber}','libs-release-local')
+	buildPromotion.promote(buildKey,buildNumber,'libs-release-local')
 }
 
 import groovyx.net.http.RESTClient

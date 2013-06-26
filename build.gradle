@@ -17,3 +17,7 @@ subprojects { subProject ->
 		}
 	}
 }
+
+task prop<<{
+	println customprop.prop
+}
