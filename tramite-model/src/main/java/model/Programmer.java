@@ -2,10 +2,10 @@ package model;
 
 import org.apache.commons.collections.list.GrowthList;
 
-public class Employee {
+public class Programmer {
     private final String name;
 
-    public Employee(String name) {
+    public Programmer(String name) {
         this.name = name;
         new GrowthList();
     }

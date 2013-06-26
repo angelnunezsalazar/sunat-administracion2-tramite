@@ -1,6 +1,6 @@
 package model;
 
-import model.Employee;
+import model.Programmer;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -8,7 +8,7 @@ import static org.junit.Assert.*;
 public class EmployeeTest {
     @Test
     public void canConstructAPersonWithAName() {
-        Employee person = new Employee("Larry");
+        Programmer person = new Programmer("Larry");
         assertEquals("Larry", person.getName());
     }
 }
