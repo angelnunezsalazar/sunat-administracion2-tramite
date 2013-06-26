@@ -1,0 +1,38 @@
+buildscript {
+    repositories {
+        maven { url 'http://repository.codehaus.org' }
+        mavenCentral()
+    }
+    dependencies {
+        classpath(group: 'org.codehaus.groovy.modules.http-builder', name: 'http-builder', version: '0.6')
+    }
+}
+
+def buildPromotion=new BuildPromotion()
+task promoteRC<<{
+	buildPromotion.promote('${bamboo.buildKey}','${bamboo.buildNumber}','libs-releasecandidate-local')
+}
+
+task promoteRelease<<{
+	buildPromotion.promote('${bamboo.buildKey}','${bamboo.buildNumber}','libs-release-local')
+}
+
+import groovyx.net.http.RESTClient
+class BuildPromotion{
+
+	void promote(String buildName,String buildNumber,String targetRepo){
+		def http = new RESTClient('http://localhost:8081/artifactory/')
+		http.headers['Authorization'] = 'Basic '+'admin:password'.bytes.encodeBase64()
+		
+		http.handler.success = { println "Promotion Success!" }
+ 
+		http.handler.failure = { resp,json  ->
+		    def message= "Promotion Fail: ${resp.statusLine}\nResponse: ${json}"
+		    throw new InvalidUserDataException(message)
+		}
+		
+		http.post(path: "api/build/promote/${buildName}/${buildNumber}",
+		          contentType: "application/json",
+		          body: [ targetRepo: targetRepo])
+	}
+}
