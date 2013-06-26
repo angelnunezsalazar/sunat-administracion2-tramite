@@ -1,4 +1,5 @@
 subprojects { subProject ->
+
 	group = 'procesos.administracion2.tramite'
 	version = currentversion
    
@@ -26,12 +27,12 @@ buildscript {
 }
 
 def buildPromotion=new BuildPromotion()
-task promoteQA<<{
-	buildPromotion.promote('multimodule','1372169950106','libs-releasecandidate-local')
+task promoteRC<<{
+	buildPromotion.promote('${bamboo.buildKey}','${bamboo.buildNumber}','libs-releasecandidate-local')
 }
 
-task promoteProd<<{
-	buildPromotion.promote('multimodule','1372172452128','libs-release-local')
+task promoteRelease<<{
+	buildPromotion.promote('${bamboo.buildKey}',${bamboo.buildNumber}','libs-release-local')
 }
 
 import groovyx.net.http.RESTClient

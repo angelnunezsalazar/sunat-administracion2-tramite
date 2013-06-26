@@ -6,6 +6,6 @@ public class ProgrammerService {
 
 	public String SayHi(String name){
 		Programmer programmer=new Programmer(name);
-		return String.format("Hi, I'am a programmer and my name is {0}", programmer.getName());
+		return String.format("Hi, I'm a programmer and my name is %s", programmer.getName());
 	}
 }
